@@ -498,8 +498,6 @@ class LocalClient(BaseClient):
 
         If both content and parts are provided, parts takes precedence.
         """
-        from openviking.message.part import Part, TextPart, part_from_dict
-
         execution = await run_with_telemetry(
             operation="session.add_message",
             telemetry=telemetry,
@@ -526,6 +524,8 @@ class LocalClient(BaseClient):
         created_at: Optional[str],
         role_id: Optional[str],
     ) -> Dict[str, Any]:
+        from openviking.message.part import Part, TextPart, part_from_dict
+
         session = await self._service.sessions.get(session_id, self._ctx, auto_create=True)
 
         message_parts: list[Part]
